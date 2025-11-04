@@ -1,0 +1,76 @@
+.inbox-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.inbox-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.inbox-card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.conversation-item {
+  transition: background-color 0.3s;
+  padding: 16px !important;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.conversation-item:hover {
+  background-color: #f5f5f5;
+}
+
+.conversation-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.conversation-title .username {
+  font-size: 16px;
+  font-weight: 500;
+  color: #262626;
+}
+
+.conversation-title .time {
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+.conversation-description {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.conversation-description .post-title {
+  font-size: 13px;
+  color: #595959;
+}
+
+.conversation-description .last-message {
+  font-size: 14px;
+  color: #8c8c8c;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 500px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .inbox-page {
+    padding: 16px;
+  }
+
+  .conversation-description .last-message {
+    max-width: 250px;
+  }
+}

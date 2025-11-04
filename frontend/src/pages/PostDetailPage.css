@@ -1,0 +1,183 @@
+.post-detail-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.post-detail-container {
+  display: flex;
+  gap: 24px;
+}
+
+/* 左侧：图片区域 */
+.post-detail-left {
+  flex: 1;
+  max-width: 600px;
+}
+
+.image-card {
+  overflow: hidden;
+}
+
+.carousel-item {
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0f0f0;
+}
+
+.post-detail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.no-image {
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0f0f0;
+}
+
+/* 右侧：信息区域 */
+.post-detail-right {
+  flex: 1;
+}
+
+.post-title-section {
+  margin-bottom: 16px;
+}
+
+.post-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #262626;
+}
+
+.post-price-section {
+  margin-bottom: 16px;
+}
+
+.price-label {
+  font-size: 16px;
+  color: #595959;
+}
+
+.price-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ff4d4f;
+  margin-left: 8px;
+}
+
+.post-description-section h3,
+.seller-info-section h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #262626;
+}
+
+.post-description {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #595959;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* 卖家信息 */
+.seller-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.seller-details {
+  flex: 1;
+}
+
+.seller-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #262626;
+  margin-bottom: 4px;
+}
+
+.seller-stats {
+  font-size: 14px;
+  color: #8c8c8c;
+  margin-bottom: 4px;
+}
+
+.seller-email {
+  font-size: 12px;
+  color: #bfbfbf;
+}
+
+/* 操作按钮 */
+.action-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.action-buttons .ant-btn {
+  flex: 1;
+}
+
+/* 加载和空状态 */
+.loading-container,
+.empty-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  gap: 16px;
+}
+
+/* 响应式设计 */
+@media (max-width: 992px) {
+  .post-detail-container {
+    flex-direction: column;
+  }
+
+  .post-detail-left {
+    max-width: 100%;
+  }
+
+  .carousel-item,
+  .no-image {
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .post-detail-page {
+    padding: 16px;
+  }
+
+  .post-title {
+    font-size: 20px;
+  }
+
+  .price-value {
+    font-size: 24px;
+  }
+
+  .carousel-item,
+  .no-image {
+    height: 300px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .action-buttons .ant-btn {
+    width: 100%;
+  }
+}

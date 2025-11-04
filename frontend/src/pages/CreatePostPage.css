@@ -1,0 +1,16 @@
+.create-post-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.create-post-card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .create-post-page {
+    padding: 16px;
+  }
+}

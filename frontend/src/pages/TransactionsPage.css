@@ -1,0 +1,94 @@
+.transactions-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.transactions-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.transactions-card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.transaction-item {
+  padding: 24px !important;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  background-color: #fafafa;
+  transition: all 0.3s;
+}
+
+.transaction-item:hover {
+  background-color: #f0f0f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.transaction-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 16px;
+}
+
+.transaction-description {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.post-info,
+.status-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.post-info .label,
+.status-info .label {
+  color: #666;
+  font-weight: 500;
+}
+
+.post-info a {
+  color: #1890ff;
+  cursor: pointer;
+}
+
+.post-info a:hover {
+  text-decoration: underline;
+}
+
+.status-info {
+  flex-wrap: wrap;
+}
+
+.complete-tip {
+  margin-top: 8px;
+  padding: 12px;
+  background-color: #f6ffed;
+  border-radius: 4px;
+  border: 1px solid #b7eb8f;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .transactions-page {
+    padding: 16px;
+  }
+
+  .transaction-item {
+    padding: 16px !important;
+  }
+
+  .transaction-title {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

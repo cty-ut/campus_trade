@@ -1,0 +1,56 @@
+.profile-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.user-info-card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-info-header {
+  display: flex;
+  gap: 32px;
+}
+
+.avatar-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-details {
+  flex: 1;
+}
+
+.user-name-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.user-name-section h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .profile-page {
+    padding: 16px;
+  }
+
+  .user-info-header {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .user-name-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

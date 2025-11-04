@@ -1,0 +1,66 @@
+.user-profile-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.user-info-card {
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-info-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.user-info-details {
+  flex: 1;
+}
+
+.user-info-details h2 {
+  margin: 0 0 8px 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.user-email {
+  color: #666;
+  margin: 0 0 8px 0;
+}
+
+.user-stats {
+  color: #262626;
+  margin: 0;
+  font-size: 16px;
+}
+
+.user-stats strong {
+  color: #1890ff;
+  font-size: 20px;
+}
+
+.user-posts-card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.posts-grid {
+  margin-top: 16px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .user-profile-page {
+    padding: 16px;
+  }
+
+  .user-info-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .user-info-details h2 {
+    font-size: 20px;
+  }
+}

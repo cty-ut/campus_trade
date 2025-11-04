@@ -1,0 +1,22 @@
+.login-page-layout {
+  min-height: 100vh; /* 占满整个屏幕高度 */
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  background-color: #f0f2f5; /* antd 推荐的淡灰色背景 */
+}
+
+/*
+  定义登录卡片的样式
+*/
+.login-card {
+  width: 400px; /* 给卡片一个固定宽度 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 添加一点阴影 */
+}
+
+/*
+  (可选) 让卡片标题居中
+*/
+.login-card .ant-card-head-title {
+  text-align: center;
+}

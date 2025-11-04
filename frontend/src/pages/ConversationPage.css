@@ -1,0 +1,148 @@
+.conversation-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: calc(100vh - 180px);
+}
+
+.conversation-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+/* 顶部信息栏 */
+.conversation-header {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.user-details .username {
+  font-size: 16px;
+  font-weight: 500;
+  color: #262626;
+}
+
+/* 消息列表区域 */
+.messages-container {
+  flex: 1;
+  overflow-y: auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.messages-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  min-height: 100%;
+}
+
+/* 消息项 */
+.message-item {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.message-item.mine {
+  flex-direction: row-reverse;
+}
+
+.message-avatar {
+  flex-shrink: 0;
+}
+
+.message-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 60%;
+}
+
+.message-item.mine .message-content-wrapper {
+  align-items: flex-end;
+}
+
+.message-item.other .message-content-wrapper {
+  align-items: flex-start;
+}
+
+/* 消息气泡 */
+.message-bubble {
+  padding: 10px 14px;
+  border-radius: 12px;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.message-bubble.mine {
+  background-color: #1890ff;
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.message-bubble.other {
+  background-color: #f0f0f0;
+  color: #262626;
+  border-bottom-left-radius: 4px;
+}
+
+.message-time {
+  font-size: 12px;
+  color: #8c8c8c;
+  padding: 0 4px;
+}
+
+/* 输入区域 */
+.input-container {
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.input-wrapper {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.input-wrapper textarea {
+  flex: 1;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .conversation-page {
+    padding: 12px;
+    height: calc(100vh - 140px);
+  }
+
+  .message-content-wrapper {
+    max-width: 75%;
+  }
+
+  .user-details .username {
+    font-size: 14px;
+  }
+}
