@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8000';
+export const API_BASE_URL = 'http://13.159.19.120';  // 移除 /api 后缀，导出以供其他文件使用
 
 const apiService = axios.create({
   baseURL: API_BASE_URL,

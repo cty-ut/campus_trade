@@ -35,9 +35,8 @@ import reportService from '../api/reportService';
 import transactionService from '../api/transactionService';
 import type { Post } from '../types/post.types';
 import type { User } from '../types/user.types';
+import { API_BASE_URL } from '../api/apiService';
 import './PostDetailPage.css';
-
-const API_BASE_URL = 'http://localhost:8000';
 
 const PostDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -363,7 +362,7 @@ const PostDetailPage: React.FC = () => {
   // 获取用户头像
   const getAvatarUrl = () => {
     if (post?.owner.avatar_url) {
-      return `${API_BASE_URL}${post.owner.avatar_url}`;
+      return post.owner.avatar_url.startsWith('http') ? post.owner.avatar_url : `${API_BASE_URL}${post.owner.avatar_url}`;
     }
     return undefined;
   };
@@ -474,7 +473,7 @@ const PostDetailPage: React.FC = () => {
                 {post.images.map((image) => (
                   <div key={image.id} className="carousel-item">
                     <img
-                      src={`${API_BASE_URL}${image.image_url}`}
+                      src={image.image_url.startsWith('http') ? image.image_url : `${API_BASE_URL}${image.image_url}`}
                       alt={post.title}
                       className="post-detail-image"
                     />

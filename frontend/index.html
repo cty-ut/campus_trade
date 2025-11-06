@@ -4,7 +4,17 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
+    <title>Campus Trade</title>
+    <!-- SPA 路由恢复脚本 -->
+    <script>
+      (function() {
+        const redirect = sessionStorage.getItem('redirectPath');
+        if (redirect && redirect !== '/') {
+          sessionStorage.removeItem('redirectPath');
+          history.replaceState(null, '', redirect);
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

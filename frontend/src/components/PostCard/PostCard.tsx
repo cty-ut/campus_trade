@@ -3,6 +3,7 @@ import { Card, Tag, Avatar, Typography, Skeleton } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import type { Post } from '../../types/post.types';
+import { API_BASE_URL } from '../../api/apiService';
 import './PostCard.css';
 
 const { Meta } = Card;
@@ -11,9 +12,6 @@ const { Text } = Typography;
 interface PostCardProps {
   post: Post;
 }
-
-// 后端基础 URL
-const API_BASE_URL = 'http://localhost:8000';
 
 /**
  * 帖子卡片组件
@@ -81,7 +79,9 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
   // 获取封面图片 URL
   const getCoverImage = () => {
     if (post.images && post.images.length > 0) {
-      return `${API_BASE_URL}${post.images[0].image_url}`;
+      const imageUrl = post.images[0].image_url;
+      // 如果已经是完整 URL，直接返回；否则拼接
+      return imageUrl.startsWith('http') ? imageUrl : `${API_BASE_URL}${imageUrl}`;
     }
     // 如果没有图片，返回默认占位图
     return 'https://via.placeholder.com/300x200?text=暂无图片';
@@ -90,7 +90,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
   // 获取用户头像 URL
   const getAvatarUrl = () => {
     if (post.owner.avatar_url) {
-      return `${API_BASE_URL}${post.owner.avatar_url}`;
+      return post.owner.avatar_url.startsWith('http') ? post.owner.avatar_url : `${API_BASE_URL}${post.owner.avatar_url}`;
     }
     return undefined;
   };

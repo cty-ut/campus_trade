@@ -6,9 +6,8 @@ import postService from '../api/postService';
 import type { Post } from '../types/post.types';
 import type { User } from '../types/user.types';
 import PostCard, { PostCardSkeleton } from '../components/PostCard';
+import { API_BASE_URL } from '../api/apiService';
 import './UserProfilePage.css';
-
-const API_BASE_URL = 'http://localhost:8000';
 
 const UserProfilePage: React.FC = () => {
   const { userId } = useParams<{ userId: string }>();
@@ -70,7 +69,7 @@ const UserProfilePage: React.FC = () => {
   // 获取头像 URL
   const getAvatarUrl = () => {
     if (user?.avatar_url) {
-      return `${API_BASE_URL}${user.avatar_url}`;
+      return user.avatar_url.startsWith('http') ? user.avatar_url : `${API_BASE_URL}${user.avatar_url}`;
     }
     return undefined;
   };

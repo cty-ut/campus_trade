@@ -1,4 +1,22 @@
-/* 顶部 Header 样式 */
+/* Header 样式 */
+.main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 移动端菜单按钮 - 默认隐藏 */
+.mobile-menu-button {
+  display: none;
+  margin-right: 12px;
+}
+
+/* Logo 样式 */
 .logo {
   height: 32px;
   margin-right: 24px;
@@ -6,11 +24,33 @@
   align-items: center;
 }
 
+/* Header 左侧容器 */
+.header-left {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Header 右侧容器 */
+.header-right {
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+}
+
+/* 桌面端菜单 */
+.desktop-menu {
+  flex: 1;
+  min-width: 0;
+  border-bottom: none;
+}
+
 /* Content 区域外层容器 - 淡灰色背景 */
 .site-layout-background {
   background: #f0f2f5;
   padding: 24px;
-  min-height: calc(100vh - 64px - 70px); /* 减去 Header 和 Footer 的高度 */
+  min-height: calc(100vh - 64px - 70px);
 }
 
 /* Content 区域内层容器 - 白色卡片 */
@@ -20,4 +60,116 @@
   min-height: 400px;
   border-radius: 8px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+}
+
+/* 移动端抽屉菜单样式 */
+.mobile-drawer .ant-drawer-body {
+  padding: 0;
+}
+
+.mobile-drawer .ant-menu {
+  border-right: none;
+}
+
+/* ==================== 响应式设计 ==================== */
+
+/* 平板设备 (小于 992px) */
+@media (max-width: 992px) {
+  .main-header {
+    padding: 0 16px;
+  }
+
+  .logo {
+    margin-right: 16px;
+  }
+
+  .header-left .desktop-menu .ant-menu-item {
+    padding: 0 12px;
+  }
+
+  .site-layout-background {
+    padding: 16px;
+  }
+
+  .site-layout-content-wrapper {
+    padding: 16px;
+  }
+}
+
+/* 移动设备 (小于 768px) */
+@media (max-width: 768px) {
+  /* 显示移动端菜单按钮 */
+  .mobile-menu-button {
+    display: inline-flex !important;
+  }
+
+  /* 隐藏桌面端菜单 */
+  .desktop-menu {
+    display: none !important;
+  }
+
+  /* Header 样式调整 */
+  .main-header {
+    padding: 0 12px;
+  }
+
+  .logo {
+    margin-right: 8px;
+  }
+
+  .logo a {
+    font-size: 16px !important;
+  }
+
+  /* 隐藏桌面端的登录/注册菜单 */
+  .auth-menu {
+    display: none !important;
+  }
+
+  /* 头像稍微小一点 */
+  .header-right .ant-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  /* Content 区域调整 */
+  .site-layout-background {
+    padding: 12px;
+  }
+
+  .site-layout-content-wrapper {
+    padding: 12px;
+    border-radius: 4px;
+  }
+
+  /* Footer 文字小一点 */
+  .ant-layout-footer {
+    padding: 16px 12px;
+    font-size: 12px;
+  }
+}
+
+/* 小屏手机 (小于 480px) */
+@media (max-width: 480px) {
+  .main-header {
+    padding: 0 8px;
+  }
+
+  .logo a {
+    font-size: 14px !important;
+  }
+
+  .site-layout-background {
+    padding: 8px;
+  }
+
+  .site-layout-content-wrapper {
+    padding: 8px;
+  }
+
+  /* 调整头像和间距 */
+  .header-right .ant-avatar {
+    width: 28px;
+    height: 28px;
+  }
 }

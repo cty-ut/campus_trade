@@ -5,9 +5,8 @@ import { UserOutlined, MessageOutlined, ReloadOutlined } from '@ant-design/icons
 import { useAuth } from '../hooks/useAuth';
 import messageService from '../api/messageService';
 import type { InboxConversation } from '../types/message.types';
+import { API_BASE_URL } from '../api/apiService';
 import './InboxPage.css';
-
-const API_BASE_URL = 'http://localhost:8000';
 
 const InboxPage: React.FC = () => {
   const navigate = useNavigate();
@@ -100,7 +99,7 @@ const InboxPage: React.FC = () => {
   // 获取用户头像
   const getAvatarUrl = (avatarUrl: string | null) => {
     if (avatarUrl) {
-      return `${API_BASE_URL}${avatarUrl}`;
+      return avatarUrl.startsWith('http') ? avatarUrl : `${API_BASE_URL}${avatarUrl}`;
     }
     return undefined;
   };

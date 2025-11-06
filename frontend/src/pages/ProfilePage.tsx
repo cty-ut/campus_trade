@@ -24,13 +24,11 @@ import {
 import type { UploadFile } from 'antd';
 import { useAuth } from '../hooks/useAuth';
 import postService from '../api/postService';
-import apiService from '../api/apiService';
+import apiService, { API_BASE_URL } from '../api/apiService';
 import userService from '../api/userService';
 import PostCard, { PostCardSkeleton } from '../components/PostCard';
 import type { Post, PostType } from '../types/post.types';
 import './ProfilePage.css';
-
-const API_BASE_URL = 'http://localhost:8000';
 
 const ProfilePage: React.FC = () => {
   const navigate = useNavigate();
@@ -185,7 +183,7 @@ const ProfilePage: React.FC = () => {
   // 获取头像 URL
   const getAvatarUrl = () => {
     if (user?.avatar_url) {
-      return `${API_BASE_URL}${user.avatar_url}`;
+      return user.avatar_url.startsWith('http') ? user.avatar_url : `${API_BASE_URL}${user.avatar_url}`;
     }
     return undefined;
   };

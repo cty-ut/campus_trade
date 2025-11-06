@@ -5,9 +5,8 @@ import { UserOutlined, CheckCircleOutlined, ClockCircleOutlined } from '@ant-des
 import { useAuth } from '../hooks/useAuth';
 import transactionService from '../api/transactionService';
 import type { Transaction } from '../types/transaction.types';
+import { API_BASE_URL } from '../api/apiService';
 import './TransactionsPage.css';
-
-const API_BASE_URL = 'http://localhost:8000';
 
 const TransactionsPage: React.FC = () => {
   const navigate = useNavigate();
@@ -63,7 +62,7 @@ const TransactionsPage: React.FC = () => {
   // 获取头像 URL
   const getAvatarUrl = (avatarUrl: string | null) => {
     if (avatarUrl) {
-      return `${API_BASE_URL}${avatarUrl}`;
+      return avatarUrl.startsWith('http') ? avatarUrl : `${API_BASE_URL}${avatarUrl}`;
     }
     return undefined;
   };

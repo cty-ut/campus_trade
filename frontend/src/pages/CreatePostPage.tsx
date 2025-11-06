@@ -16,7 +16,7 @@ import { PlusOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 import type { UploadFile, UploadProps } from 'antd';
 import { useAuth } from '../hooks/useAuth';
 import postService from '../api/postService';
-import type { Category, PostType, Condition } from '../types/post.types';
+import type { Category, PostType } from '../types/post.types';
 import './CreatePostPage.css';
 
 const { TextArea } = Input;
@@ -72,20 +72,26 @@ const CreatePostPage: React.FC = () => {
   const beforeUpload = (file: File) => {
     const isImage = file.type.startsWith('image/');
     if (!isImage) {
-      app.message.error('只能上传图片文件！');
-      return false;
+      app.message.error(`${file.name} 不是图片文件！`);
+      return Upload.LIST_IGNORE; // 忽略非图片文件
     }
     const isLt5M = file.size / 1024 / 1024 < 5;
     if (!isLt5M) {
-      app.message.error('图片大小不能超过 5MB！');
-      return false;
+      app.message.error(`${file.name} 大小超过 5MB！`);
+      return Upload.LIST_IGNORE; // 忽略超大文件
     }
+    
     return false; // 返回 false 阻止自动上传，我们手动控制
   };
 
   // 处理图片变化
   const handleImageChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
-    setFileList(newFileList);
+    // 限制最多9张图片
+    const validFileList = newFileList.slice(0, 9);
+    if (newFileList.length > 9) {
+      app.message.warning('最多只能上传9张图片，已自动限制为前9张');
+    }
+    setFileList(validFileList);
   };
 
   // 提交表单
@@ -299,7 +305,11 @@ const CreatePostPage: React.FC = () => {
               fileList={fileList}
               onChange={handleImageChange}
               beforeUpload={beforeUpload}
-              maxCount={9}
+              multiple={true}
+              accept="image/*"
+              onDrop={(e) => {
+                console.log('拖拽的文件', e.dataTransfer.files);
+              }}
             >
               {fileList.length >= 9 ? null : (
                 <div>
@@ -309,7 +319,9 @@ const CreatePostPage: React.FC = () => {
               )}
             </Upload>
             <div style={{ color: '#8c8c8c', fontSize: '12px', marginTop: '8px' }}>
-              支持 JPG、PNG 格式，单张图片不超过 5MB
+              • 支持 JPG、PNG 格式，单张图片不超过 5MB<br />
+              • 支持拖拽上传，可一次选择多张图片<br />
+              • 最多上传 9 张图片
             </div>
           </Form.Item>
 

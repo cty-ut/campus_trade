@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Layout, Card, Form, Input, Button, Typography, message, App } from 'antd'; 
+import { Layout, Card, Form, Input, Button, Typography, App } from 'antd'; 
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
 import { Link, useNavigate, Navigate } from 'react-router-dom';
 import './LoginPage.css';

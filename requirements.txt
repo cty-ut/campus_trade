@@ -1,0 +1,26 @@
+# FastAPI 核心框架
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+
+# 数据库相关
+sqlalchemy==2.0.25
+pymysql==1.1.0        
+cryptography==41.0.7  
+
+# 身份认证和安全
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+
+# 文件上传
+python-multipart==0.0.6
+
+# 配置管理
+python-dotenv==1.0.0
+pydantic-settings==2.1.0
+
+# AWS SDK (可选，如果使用 S3 存储图片)
+boto3==1.34.34
+
+# 其他工具
+pydantic==2.5.3
+email-validator==2.1.0 

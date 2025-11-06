@@ -40,11 +40,66 @@
 
 /* 响应式设计 */
 @media (max-width: 768px) {
+  .post-card {
+    border-radius: 4px;
+  }
+
+  .post-card:hover {
+    transform: translateY(-2px);
+  }
+
   .post-card-cover {
-    height: 180px;
+    height: 160px;
   }
   
   .post-card-title {
     font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .post-card .ant-card-body {
+    padding: 12px;
+  }
+
+  .post-card-tags {
+    margin-bottom: 8px;
+  }
+
+  .post-card-tags .ant-tag {
+    font-size: 12px;
+    padding: 0 6px;
+    margin-right: 4px;
+  }
+
+  .post-card-price {
+    margin-bottom: 6px;
+    font-size: 14px;
+  }
+
+  .post-card-category {
+    margin-bottom: 8px;
+    font-size: 12px;
+  }
+
+  .post-card .ant-card-meta-description {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .post-card-cover {
+    height: 140px;
+  }
+
+  .post-card .ant-card-body {
+    padding: 8px;
+  }
+
+  .post-card-title {
+    font-size: 13px;
+  }
+
+  .post-card-price {
+    font-size: 13px;
   }
 }

@@ -8,9 +8,114 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* 图片上传区域样式优化 */
+.create-post-page .ant-upload-wrapper .ant-upload-list-picture-card-container {
+  margin: 0 8px 8px 0;
+}
+
+.create-post-page .ant-upload.ant-upload-select-picture-card {
+  width: 104px;
+  height: 104px;
+  margin: 0 8px 8px 0;
+  border: 2px dashed #d9d9d9;
+  transition: all 0.3s ease;
+}
+
+.create-post-page .ant-upload.ant-upload-select-picture-card:hover {
+  border-color: #1890ff;
+  background-color: #fafafa;
+}
+
+/* 拖拽时的样式 */
+.create-post-page .ant-upload-drag {
+  border: 2px dashed #1890ff;
+  background-color: #e6f7ff;
+}
+
+.create-post-page .ant-upload-drag:hover {
+  border-color: #40a9ff;
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
   .create-post-page {
+    padding: 12px;
+  }
+
+  .create-post-card {
+    border-radius: 4px;
+  }
+
+  .create-post-card .ant-card-head {
+    padding: 12px 16px;
+    font-size: 16px;
+  }
+
+  .create-post-card .ant-card-body {
     padding: 16px;
+  }
+
+  .create-post-page .ant-form-item-label > label {
+    font-size: 14px;
+  }
+
+  .create-post-page .ant-input,
+  .create-post-page .ant-input-number,
+  .create-post-page .ant-select,
+  .create-post-page .ant-radio-button-wrapper {
+    font-size: 14px;
+  }
+
+  .create-post-page .ant-btn {
+    font-size: 14px;
+    height: 36px;
+  }
+  
+  .create-post-page .ant-upload.ant-upload-select-picture-card {
+    width: 90px;
+    height: 90px;
+  }
+
+  /* 单行显示上传的图片 */
+  .create-post-page .ant-upload-list-picture-card .ant-upload-list-item {
+    width: 90px;
+    height: 90px;
+  }
+}
+
+@media (max-width: 480px) {
+  .create-post-page {
+    padding: 8px;
+  }
+
+  .create-post-card .ant-card-head {
+    padding: 10px 12px;
+    font-size: 15px;
+  }
+
+  .create-post-card .ant-card-body {
+    padding: 12px;
+  }
+
+  .create-post-page .ant-upload.ant-upload-select-picture-card {
+    width: 70px;
+    height: 70px;
+  }
+
+  .create-post-page .ant-upload-list-picture-card .ant-upload-list-item {
+    width: 70px;
+    height: 70px;
+  }
+
+  /* 按钮改为块级元素，占满宽度 */
+  .create-post-page .ant-form-item:last-child .ant-space {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .create-post-page .ant-form-item:last-child .ant-btn {
+    width: 100%;
+    margin-bottom: 8px;
   }
 }

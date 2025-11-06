@@ -7,9 +7,8 @@ import messageService from '../api/messageService';
 import postService from '../api/postService';
 import type { Message } from '../types/message.types';
 import type { Post } from '../types/post.types';
+import { API_BASE_URL } from '../api/apiService';
 import './ConversationPage.css';
-
-const API_BASE_URL = 'http://localhost:8000';
 
 const ConversationPage: React.FC = () => {
   const { postId, otherUserId } = useParams<{ postId: string; otherUserId: string }>();
@@ -24,6 +23,7 @@ const ConversationPage: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>('');
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<any>(null);
   const lastMessageIdRef = useRef<number | null>(null);
 
   // 自动滚动到底部
@@ -136,6 +136,11 @@ const ConversationPage: React.FC = () => {
 
       // 发送成功后立即刷新
       await fetchMessages();
+      
+      // 发送成功后自动聚焦到输入框
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 100);
     } catch (error: any) {
       console.error('发送消息失败:', error);
       app.message.error('发送失败，请重试');
@@ -164,7 +169,7 @@ const ConversationPage: React.FC = () => {
   // 获取头像 URL
   const getAvatarUrl = (avatarUrl: string | null) => {
     if (avatarUrl) {
-      return `${API_BASE_URL}${avatarUrl}`;
+      return avatarUrl.startsWith('http') ? avatarUrl : `${API_BASE_URL}${avatarUrl}`;
     }
     return undefined;
   };
@@ -282,6 +287,7 @@ const ConversationPage: React.FC = () => {
       <Card className="input-container">
         <div className="input-wrapper">
           <Input.TextArea
+            ref={inputRef}
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyPress={handleKeyPress}

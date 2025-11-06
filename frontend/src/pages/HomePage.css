@@ -55,21 +55,81 @@
   }
 
   .search-bar {
-    padding: 16px;
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 4px;
+  }
+
+  .search-bar .ant-input-search {
     margin-bottom: 12px;
   }
 
   .filter-bar {
     margin-top: 12px;
+    gap: 8px;
+  }
+
+  .filter-bar > * {
+    margin-bottom: 8px;
   }
   
   .post-type-tabs {
     padding: 0 8px;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
+    border-radius: 4px;
+  }
+
+  .post-type-tabs .ant-tabs-nav {
+    margin-bottom: 12px;
+  }
+
+  .post-type-tabs .ant-tabs-tab {
+    padding: 8px 12px;
+    font-size: 14px;
   }
   
   .pagination-container {
-    margin-top: 24px;
-    padding: 16px 0;
+    margin-top: 16px;
+    padding: 12px 0;
+  }
+
+  /* 分页器在移动端更紧凑 */
+  .pagination-container .ant-pagination {
+    font-size: 14px;
+  }
+
+  .pagination-container .ant-pagination-item {
+    min-width: 28px;
+    height: 28px;
+    line-height: 26px;
+    margin: 0 3px;
+  }
+
+  .pagination-container .ant-pagination-prev,
+  .pagination-container .ant-pagination-next {
+    min-width: 28px;
+    height: 28px;
+    line-height: 26px;
+  }
+}
+
+/* 小屏手机优化 */
+@media (max-width: 480px) {
+  .search-bar {
+    padding: 8px;
+  }
+
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-bar > * {
+    width: 100%;
+  }
+
+  .post-type-tabs .ant-tabs-tab {
+    padding: 6px 8px;
+    font-size: 13px;
   }
 }

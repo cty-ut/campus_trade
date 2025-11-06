@@ -1,20 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Menu, Avatar, Dropdown, Badge } from 'antd'; 
+import { Layout, Menu, Avatar, Dropdown, Badge, Drawer, Button } from 'antd'; 
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { UserOutlined, LogoutOutlined, PlusOutlined, HeartOutlined, MessageOutlined, TransactionOutlined } from '@ant-design/icons';
+import { 
+  UserOutlined, 
+  LogoutOutlined, 
+  PlusOutlined, 
+  HeartOutlined, 
+  MessageOutlined, 
+  TransactionOutlined,
+  MenuOutlined,
+  HomeOutlined
+} from '@ant-design/icons';
 import './MainLayout.css'; 
 import { useAuth } from '../../hooks/useAuth';
 import messageService from '../../api/messageService';
+import { API_BASE_URL } from '../../api/apiService';
 
 const { Header, Content, Footer } = Layout;
-
-// 定义后端基础 URL (用于拼接图片)
-const API_BASE_URL = 'http://localhost:8000';
 
 const MainLayout: React.FC = () => {
   const { user, logout, isLoading } = useAuth();
   const location = useLocation();
   const [unreadCount, setUnreadCount] = useState<number>(0);
+  const [mobileMenuVisible, setMobileMenuVisible] = useState<boolean>(false);
 
   // 根据当前路由计算选中的菜单项
   const getSelectedMenuKey = (): string[] => {
@@ -78,7 +86,7 @@ const MainLayout: React.FC = () => {
 
   // 计算头像的完整 URL
   const avatarSrc = (user && user.avatar_url) 
-    ? `${API_BASE_URL}${user.avatar_url}` 
+    ? (user.avatar_url.startsWith('http') ? user.avatar_url : `${API_BASE_URL}${user.avatar_url}`)
     : undefined;
 
   const menuOverlay = (
@@ -96,29 +104,37 @@ const MainLayout: React.FC = () => {
   return (
     <Layout style={{ minHeight: '100vh' }}>
       
-      <Header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 50px' }}>
+      <Header className="main-header">
+        {/* 移动端菜单按钮 */}
+        <Button 
+          className="mobile-menu-button"
+          type="text"
+          icon={<MenuOutlined style={{ fontSize: '20px', color: '#fff' }} />}
+          onClick={() => setMobileMenuVisible(true)}
+        />
+
         {/* 左侧：Logo + 菜单 */}
-        <div style={{ display: 'flex', alignItems: 'center', flex: 1 }}>
-          <div className="logo" style={{ marginRight: '40px' }}>
-            <span style={{ color: '#fff', fontSize: '18px', fontWeight: 'bold' }}>校园二手</span>
+        <div className="header-left">
+          <div className="logo">
+            <Link to="/" style={{ color: '#fff', fontSize: '18px', fontWeight: 'bold', textDecoration: 'none' }}>
+              校园二手
+            </Link>
           </div>
           
           <Menu 
             theme="dark" 
             mode="horizontal" 
-            selectedKeys={getSelectedMenuKey()}  // 动态计算选中项
-            // 禁用响应式折叠，保持所有菜单项始终可见
-            overflowedIndicator={null}
+            selectedKeys={getSelectedMenuKey()}
+            className="desktop-menu"
             style={{ 
               flex: 1,
               minWidth: 0,
               borderBottom: 'none'
             }}
           >
-            <Menu.Item key="home">
+            <Menu.Item key="home" icon={<HomeOutlined />}>
               <Link to="/">首页</Link>
             </Menu.Item>
-            {/* 只有在非加载状态且已登录时才显示菜单 */}
             {!isLoading && user && (
               <>
                 <Menu.Item key="inbox">
@@ -130,7 +146,7 @@ const MainLayout: React.FC = () => {
                   </Link>
                 </Menu.Item>
                 <Menu.Item key="favorites" icon={<HeartOutlined />}>
-                  <Link to="/favorites">我的收藏</Link>
+                  <Link to="/favorites">收藏</Link>
                 </Menu.Item>
                 <Menu.Item key="transactions" icon={<TransactionOutlined />}>
                   <Link to="/transactions">交易</Link>
@@ -144,29 +160,23 @@ const MainLayout: React.FC = () => {
         </div>
 
         {/* 右侧：用户菜单 */}
-        <div style={{ marginLeft: '20px' }}>
-          {/* 加载中不显示任何内容，避免闪烁 */}
+        <div className="header-right">
           {!isLoading && (
             user ? (
-              // 如果 user 存在 (已登录)
-              <Dropdown overlay={menuOverlay} trigger={['hover']}>
+              <Dropdown overlay={menuOverlay} trigger={['hover', 'click']}>
                 <Link to="/profile">
                   <Avatar 
                     src={avatarSrc} 
                     icon={<UserOutlined />} 
                     style={{ 
                       cursor: 'pointer',
-                      // 在个人中心页面时添加边框高亮
                       border: location.pathname === '/profile' ? '2px solid #1890ff' : 'none'
                     }}
                   />
                 </Link>
               </Dropdown>
-              
             ) : (
-              
-              // 如果 user 为 null (未登录)
-              <Menu theme="dark" mode="horizontal">
+              <Menu theme="dark" mode="horizontal" className="auth-menu">
                 <Menu.Item key="login">
                   <Link to="/login">登录</Link>
                 </Menu.Item>
@@ -178,6 +188,63 @@ const MainLayout: React.FC = () => {
           )}
         </div>
       </Header>
+
+      {/* 移动端抽屉菜单 */}
+      <Drawer
+        title="菜单"
+        placement="left"
+        onClose={() => setMobileMenuVisible(false)}
+        open={mobileMenuVisible}
+        className="mobile-drawer"
+      >
+        <Menu
+          mode="vertical"
+          selectedKeys={getSelectedMenuKey()}
+          onClick={() => setMobileMenuVisible(false)}
+        >
+          <Menu.Item key="home" icon={<HomeOutlined />}>
+            <Link to="/">首页</Link>
+          </Menu.Item>
+          {user && (
+            <>
+              <Menu.Item key="inbox">
+                <Link to="/inbox" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <Badge count={unreadCount} size="small">
+                    <MessageOutlined />
+                  </Badge>
+                  <span>消息</span>
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="favorites" icon={<HeartOutlined />}>
+                <Link to="/favorites">我的收藏</Link>
+              </Menu.Item>
+              <Menu.Item key="transactions" icon={<TransactionOutlined />}>
+                <Link to="/transactions">交易记录</Link>
+              </Menu.Item>
+              <Menu.Item key="create" icon={<PlusOutlined />}>
+                <Link to="/posts/new">发布商品</Link>
+              </Menu.Item>
+              <Menu.Divider />
+              <Menu.Item key="profile" icon={<UserOutlined />}>
+                <Link to="/profile">个人中心</Link>
+              </Menu.Item>
+              <Menu.Item key="logout" icon={<LogoutOutlined />} onClick={handleLogout}>
+                退出登录
+              </Menu.Item>
+            </>
+          )}
+          {!user && (
+            <>
+              <Menu.Item key="login">
+                <Link to="/login">登录</Link>
+              </Menu.Item>
+              <Menu.Item key="register">
+                <Link to="/register">注册</Link>
+              </Menu.Item>
+            </>
+          )}
+        </Menu>
+      </Drawer>
 
       {/* 内容区域 */}
       <Content className="site-layout-background">
