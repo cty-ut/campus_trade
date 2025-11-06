@@ -174,24 +174,32 @@ const ConversationPage: React.FC = () => {
     return undefined;
   };
 
-  // 格式化时间
+  // 格式化时间（UTC+9 日本时间）
   const formatTime = (dateStr: string) => {
     const date = new Date(dateStr);
+    // 直接加 9 小时转换为日本时间
+    const jstDate = new Date(date.getTime() + 9 * 60 * 60 * 1000);
+    
     const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const messageDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    const nowJST = new Date(now.getTime() + 9 * 60 * 60 * 1000);
+    const today = new Date(nowJST.getFullYear(), nowJST.getMonth(), nowJST.getDate());
+    const messageDate = new Date(jstDate.getFullYear(), jstDate.getMonth(), jstDate.getDate());
 
-    const timeStr = date.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+    const hours = String(jstDate.getHours()).padStart(2, '0');
+    const minutes = String(jstDate.getMinutes()).padStart(2, '0');
+    const timeStr = `${hours}:${minutes}`;
 
     if (messageDate.getTime() === today.getTime()) {
       return timeStr;
     } else if (messageDate.getTime() === today.getTime() - 86400000) {
       return `昨天 ${timeStr}`;
     } else {
-      return `${date.toLocaleDateString('zh-CN')} ${timeStr}`;
+      const year = jstDate.getFullYear();
+      const month = jstDate.getMonth() + 1;
+      const day = jstDate.getDate();
+      return `${year}/${month}/${day} ${timeStr}`;
     }
   };
-
   const otherUser = getOtherUser();
 
   if (loading) {

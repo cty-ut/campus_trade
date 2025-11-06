@@ -67,17 +67,15 @@ const TransactionsPage: React.FC = () => {
     return undefined;
   };
 
-  // 格式化时间
+  // 格式化时间（UTC+9 日本时间）
   const formatTime = (dateStr: string) => {
     const date = new Date(dateStr);
-    return date.toLocaleDateString('zh-CN', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-  };
-
-  // 判断当前用户的角色和确认状态
+    const jstDate = new Date(date.getTime() + 9 * 60 * 60 * 1000);
+    const year = jstDate.getFullYear();
+    const month = jstDate.getMonth() + 1;
+    const day = jstDate.getDate();
+    return `${year}年${month}月${day}日`;
+  };  // 判断当前用户的角色和确认状态
   const getUserStatus = (transaction: Transaction) => {
     if (!user) return { role: '', confirmed: false, otherConfirmed: false, otherUser: null };
 

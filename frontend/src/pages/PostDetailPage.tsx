@@ -521,11 +521,19 @@ const PostDetailPage: React.FC = () => {
                 {getConditionText()}
               </Descriptions.Item>
               <Descriptions.Item label="发布时间">
-                {new Date(post.created_at).toLocaleString('zh-CN')}
+                {(() => {
+                  const date = new Date(post.created_at);
+                  const jstDate = new Date(date.getTime() + 9 * 60 * 60 * 1000);
+                  return `${jstDate.getFullYear()}/${jstDate.getMonth() + 1}/${jstDate.getDate()} ${String(jstDate.getHours()).padStart(2, '0')}:${String(jstDate.getMinutes()).padStart(2, '0')}`;
+                })()}
               </Descriptions.Item>
               {post.updated_at !== post.created_at && (
                 <Descriptions.Item label="更新时间">
-                  {new Date(post.updated_at).toLocaleString('zh-CN')}
+                  {(() => {
+                    const date = new Date(post.updated_at);
+                    const jstDate = new Date(date.getTime() + 9 * 60 * 60 * 1000);
+                    return `${jstDate.getFullYear()}/${jstDate.getMonth() + 1}/${jstDate.getDate()} ${String(jstDate.getHours()).padStart(2, '0')}:${String(jstDate.getMinutes()).padStart(2, '0')}`;
+                  })()}
                 </Descriptions.Item>
               )}
             </Descriptions>

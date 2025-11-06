@@ -256,8 +256,12 @@ const ProfilePage: React.FC = () => {
               <Descriptions.Item label="成功交易">
                 {user.success_trades} 次
               </Descriptions.Item>
-              <Descriptions.Item label="注册时间">
-                {new Date(user.created_at).toLocaleDateString('zh-CN')}
+                            <Descriptions.Item label="注册时间">
+                {(() => {
+                  const date = new Date(user.created_at);
+                  const jstDate = new Date(date.getTime() + 9 * 60 * 60 * 1000);
+                  return `${jstDate.getFullYear()}/${jstDate.getMonth() + 1}/${jstDate.getDate()}`;
+                })()}
               </Descriptions.Item>
             </Descriptions>
           </div>

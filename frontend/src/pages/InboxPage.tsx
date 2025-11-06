@@ -79,11 +79,15 @@ const InboxPage: React.FC = () => {
     fetchInbox(true);
   };
 
-  // 格式化时间显示
+  // 格式化时间显示（UTC+9 日本时间）
   const formatTime = (dateStr: string) => {
     const date = new Date(dateStr);
+    // 加 9 小时转换为日本时间
+    const jstDate = new Date(date.getTime() + 9 * 60 * 60 * 1000);
     const now = new Date();
-    const diff = now.getTime() - date.getTime();
+    const nowJST = new Date(now.getTime() + 9 * 60 * 60 * 1000);
+    
+    const diff = nowJST.getTime() - jstDate.getTime();
     const minutes = Math.floor(diff / 60000);
     const hours = Math.floor(diff / 3600000);
     const days = Math.floor(diff / 86400000);
@@ -93,10 +97,12 @@ const InboxPage: React.FC = () => {
     if (hours < 24) return `${hours}小时前`;
     if (days === 1) return '昨天';
     if (days < 7) return `${days}天前`;
-    return date.toLocaleDateString('zh-CN');
-  };
-
-  // 获取用户头像
+    
+    const year = jstDate.getFullYear();
+    const month = jstDate.getMonth() + 1;
+    const day = jstDate.getDate();
+    return `${year}/${month}/${day}`;
+  };  // 获取用户头像
   const getAvatarUrl = (avatarUrl: string | null) => {
     if (avatarUrl) {
       return avatarUrl.startsWith('http') ? avatarUrl : `${API_BASE_URL}${avatarUrl}`;
