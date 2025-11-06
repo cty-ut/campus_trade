@@ -29,7 +29,7 @@ app.mount("/static", StaticFiles(directory="backend/static"), name="static")
 origins = [
     "http://localhost:3000", # 你的 React (CRA) 开发服务器地址
     "http://localhost:5173", # 你的 React (Vite) 开发服务器地址
-    "http://campus-trade-frontend-1762266094.s3-website-ap-northeast-1.amazonaws.com", # AWS S3 前端
+    "http://campus-trade-frontend-1762266094.s3-website-ap-northeast-1.amazonaws.com", 
 ]
 
 app.add_middleware(
@@ -223,7 +223,7 @@ def upload_user_avatar(
     save_path = f"backend/static/avatars/{file_name}"
     
     # D. ⬇️ 关键：使用新的 "avatars" URL ⬇️
-    url_path = f"/static/avatars/{file_name}"
+    url_path = f"http://13.159.19.120/static/avatars/{file_name}"
     
     try:
         # E. 保存文件
@@ -461,7 +461,7 @@ def upload_image_for_post(
     save_path = f"backend/static/images/{file_name}"
     
     # D. 定义文件在服务器上的“URL访问路径” (这是我们要存入数据库的)
-    url_path = f"/static/images/{file_name}"
+    url_path = f"http://13.159.19.120/static/images/{file_name}"
     
     try:
         # E. (核心) 以二进制写模式 (wb) 打开保存路径
